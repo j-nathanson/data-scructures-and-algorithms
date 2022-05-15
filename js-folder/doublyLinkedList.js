@@ -80,9 +80,21 @@ class DoublyLinkedList {
         return currentNode;
     }
 
+    printList() {
+        const arr = [];
+        let currentNode = this.head;
+        while (currentNode !== null) {
+            arr.push(currentNode.value);
+            currentNode = currentNode.next;
+        }
+        return arr;
+    }
+
 }
 
 const dll = new DoublyLinkedList(89);
-console.log(dll.append(11));
-console.log(dll.prepend(26));
-console.log(dll.insert(1, 55));
+dll.append(11);
+dll.prepend(26);
+dll.insert(70, 55);
+console.log(dll.printList());
+
