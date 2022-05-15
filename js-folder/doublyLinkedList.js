@@ -54,7 +54,7 @@ class DoublyLinkedList {
             // find/create nodes
             const newNode = this.createNewNode(value);
             const previousNode = this.traverseToIndex(index - 1);
-            const afterNode = this.traverseToIndex(index);
+            const afterNode = previousNode.next;
 
             // connect newNode to LL
             newNode.prev = previousNode;
@@ -82,7 +82,7 @@ class DoublyLinkedList {
             newTailNode.next = null;
         } else {
             const previousNode = this.traverseToIndex(index - 1);
-            const afterNode = this.traverseToIndex(index + 1);
+            const afterNode = previousNode.next.next;
 
             previousNode.next = afterNode;
             afterNode.prev = previousNode;
@@ -120,7 +120,7 @@ const dll = new DoublyLinkedList(89);
 dll.append(11);
 dll.prepend(26);
 dll.insert(1, 55);
-dll.remove(3);
+dll.remove(2);
 console.log(dll.printList());
 console.log(dll);
 
