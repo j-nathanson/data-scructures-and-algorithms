@@ -39,6 +39,34 @@ class DoublyLinkedList {
         this.length++;
         return this;
     }
+
+    insert(index, value) {
+
+        // add to beginning
+        //add to end
+        // add too middle
+        if (index === 0) {
+            this.prepend(value)
+        }
+        else if (index >= this.length) {
+            this.append(value)
+        } else {
+            // find/create nodes
+            const newNode = this.createNewNode(value);
+            const previousNode = this.traverseToIndex(index - 1);
+            const afterNode = this.traverseToIndex(index);
+
+            // connect newNode to LL
+            newNode.prev = previousNode;
+            newNode.next = afterNode;
+
+            // update next/prev properties of old nodes
+            previousNode.next = newNode;
+            afterNode.prev = newNode;
+        }
+        this.length++;
+        return this;
+    }
     traverseToIndex(index) {
         // check params
 
@@ -52,12 +80,9 @@ class DoublyLinkedList {
         return currentNode;
     }
 
-    insert(index, value) {
-
-    }
 }
 
-const dll = new DoublyLinkedList(5);
-console.log(dll.append(9));
-console.log(dll.append(88));
-  // console.log(dd.prepend(0));
+const dll = new DoublyLinkedList(89);
+console.log(dll.append(11));
+console.log(dll.prepend(26));
+console.log(dll.insert(1, 55));
