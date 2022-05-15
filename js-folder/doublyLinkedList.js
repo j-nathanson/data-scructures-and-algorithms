@@ -48,7 +48,7 @@ class DoublyLinkedList {
         if (index === 0) {
             this.prepend(value)
         }
-        else if (index >= this.length) {
+        else if (index >= this.length - 1) {
             this.append(value)
         } else {
             // find/create nodes
@@ -72,12 +72,11 @@ class DoublyLinkedList {
         // remove from beginning
         //remove from end
         // remove from middle
-
         if (index === 0) {
             const newHeadNode = this.head.next;
             this.head = newHeadNode;
             newHeadNode.prev = null;
-        } else if (index >= this.length) {
+        } else if (index >= this.length - 1) {
             const newTailNode = this.tail.prev;
             this.tail = newTailNode;
             newTailNode.next = null;
@@ -121,7 +120,7 @@ const dll = new DoublyLinkedList(89);
 dll.append(11);
 dll.prepend(26);
 dll.insert(1, 55);
-dll.remove(2);
+dll.remove(3);
 console.log(dll.printList());
 console.log(dll);
 
