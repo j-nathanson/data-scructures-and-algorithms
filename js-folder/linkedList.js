@@ -184,16 +184,50 @@ class LinkedList {
         this.length--;
         return this.printList();
     }
+
+    reverse() {
+        //if LL length is one return the LL
+        if (this.length === 1) {
+            return this;
+        }
+        // previous node will start at null
+        //current for current node at iteration
+        // following for pointer to the next node to not forget in memory
+        // change tail pointer
+        let previous = null;
+        let current = this.head;
+        let following = this.head;
+        this.tail = this.head;
+
+        //iterate until it reaches the null value from the original tail node
+        while (current !== null) {
+            // point to the next node so it and subsequent nodes are not forgotten in memory
+            following = current.next;
+            //change nodes next property to now point to the value previous is pointing to
+            current.next = previous;
+            //move the pointer of previous to what would be the next node in the original list
+            previous = current;
+            // move the pointer of current to the same value following is pointing to
+            current = following;
+        }
+
+        // change head of linked list to the last value previous points to, which in turns points to the rest of the LL
+        this.head = previous;
+        return this
+    }
 }
 
-const myLinkedList = new LinkedList(10);
+const myLinkedList = new LinkedList(1);
 
 // 11,1,10,5,16
-myLinkedList.append(5);
-myLinkedList.prepend(1);
-myLinkedList.append(16);
-myLinkedList.prepend(11);
-myLinkedList.insert2(3, 99);
-myLinkedList.remove(6);
+myLinkedList.append(10);
+// myLinkedList.append(16);
+// myLinkedList.append(88);
+myLinkedList.reverse();
+// myLinkedList.prepend(1);
+// myLinkedList.append(16);
+// myLinkedList.prepend(11);
+// myLinkedList.insert2(3, 99);
+// myLinkedList.remove(6);
 console.log(myLinkedList.printList());
 console.log(myLinkedList);
