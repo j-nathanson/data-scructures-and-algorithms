@@ -213,7 +213,29 @@ class LinkedList {
 
         // change head of linked list to the last value previous points to, which in turns points to the rest of the LL
         this.head = previous;
-        return this
+        return this;
+    }
+
+    reverse2() {
+        // ZTM solution
+        if (!this.head.next) {
+            return this;
+        }
+
+        let first = this.head;
+        this.tail = this.head;
+        let second = first.next;
+
+        // while second is not null
+        while (second) {
+            const temp = second.next;
+            second.next = first;
+            first = second;
+            second = temp;
+        }
+        this.head.next = null;
+        this.head = first;
+        return this;
     }
 }
 
@@ -221,9 +243,9 @@ const myLinkedList = new LinkedList(1);
 
 // 11,1,10,5,16
 myLinkedList.append(10);
-// myLinkedList.append(16);
-// myLinkedList.append(88);
-myLinkedList.reverse();
+myLinkedList.append(16);
+myLinkedList.append(88);
+myLinkedList.reverse2();
 // myLinkedList.prepend(1);
 // myLinkedList.append(16);
 // myLinkedList.prepend(11);
