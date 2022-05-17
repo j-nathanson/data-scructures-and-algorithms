@@ -16,52 +16,47 @@ class Stack {
     }
     push(value) {
         const newNode = new Node(value);
-
-        if (this.isEmpty()) {
+        if (this.length === 0) {
+            this.top = newNode;
             this.bottom = newNode;
         } else {
-            this.top.next = newNode;
+            const holdingPointer = this.top;
+            this.top = newNode;
+            this.top.next = holdingPointer;
         }
-        //update top no matter the case
-        this.top = newNode;
         this.length++;
-
+        return this;
     }
     pop() {
+        // return null because stack is already empty
+        if (!this.top) {
+            return null;
+        }
+        // for last bottom node in stack
         if (this.length === 1) {
             this.bottom = null;
-            this.top = null;
-        } else {
-            //go to second to last node
-            const newTopNode = this.traverseToIndex(this.length - 2);
-            console.log(newTopNode)
-            newTopNode.next = null;
-            this.top = newTopNode;
         }
+        //an option is to still save old top node
+        // const holdingPointer = this.top 
+        this.top = this.top.next; //initialize to null
         this.length--;
+        return this;
+
+        // could return this value if we want to use later
+        // return holdingPointer
     }
     isEmpty() {
-        return this.length === 0
-    }
-    traverseToIndex(index) {
-        let counter = 0;
-        let currentNode = this.bottom;
-        while (counter !== index) {
-            currentNode = currentNode.next;
-            counter++;
-        }
-
-        return currentNode;
-
+        return this.length === 0;
     }
 }
 
-const myStack = new Stack();
 
+const myStack = new Stack();
 myStack.push('google');
 myStack.push('udemy');
 myStack.push('Discord');
 myStack.pop()
+console.log(myStack.peek())
 console.log(myStack);
 
   //Discord
