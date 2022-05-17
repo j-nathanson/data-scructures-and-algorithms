@@ -27,10 +27,32 @@ class Stack {
         this.length++;
 
     }
-    pop() {//remove the top
+    pop() {
+        if (this.length === 1) {
+            this.bottom = null;
+            this.top = null;
+        } else {
+            //go to second to last node
+            const newTopNode = this.traverseToIndex(this.length - 2);
+            console.log(newTopNode)
+            newTopNode.next = null;
+            this.top = newTopNode;
+        }
+        this.length--;
     }
     isEmpty() {
         return this.length === 0
+    }
+    traverseToIndex(index) {
+        let counter = 0;
+        let currentNode = this.bottom;
+        while (counter !== index) {
+            currentNode = currentNode.next;
+            counter++;
+        }
+
+        return currentNode;
+
     }
 }
 
@@ -39,6 +61,7 @@ const myStack = new Stack();
 myStack.push('google');
 myStack.push('udemy');
 myStack.push('Discord');
+myStack.pop()
 console.log(myStack);
 
   //Discord
