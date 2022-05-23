@@ -16,7 +16,6 @@ class BinarySearchTree {
 
         if (!this.root) {
             this.root = newNode;
-            return this;
         } else {
             let currentNode = this.root;
             let previousNode = this.root;
@@ -40,9 +39,8 @@ class BinarySearchTree {
             }
 
             previousNode[lastDirection] = newNode;
-            return this;
-
         }
+        return this;
     }
     lookup(value) {
         let currentNode = this.root;
@@ -65,6 +63,65 @@ class BinarySearchTree {
     // remove
 }
 
+// ZTM solution
+class BinarySearchTree2 {
+    constructor() {
+        this.root = null;
+    }
+    insert(value) {
+        const newNode = new Node(value);
+
+        if (this.root === null) {
+            this.root = newNode;
+            return this;
+        } else {
+            let currentNode = this.root;
+            while (true) {
+                if (value < currentNode.value) {
+                    // Left
+                    // if currentNode.left equals null then insert here
+                    if (!currentNode.left) {
+                        currentNode.left = newNode;
+                        return this;
+                    }
+                    currentNode = currentNode.left;
+                } else {
+                    // Right
+                    if (!currentNode.right) {
+                        currentNode.right = newNode;
+                        return this;
+                    }
+                    currentNode = currentNode.right;
+                }
+            }
+
+
+
+
+        }
+
+    }
+    lookup(value) {
+        // if root is null
+        if (!this.root) {
+            return false;
+        }
+
+        let currentNode = this.root;
+        while (currentNode) {
+            if (value < currentNode.value) {
+                currentNode = currentNode.left;
+            } else if (value > currentNode.value) {
+                currentNode = currentNode.right;
+                // do a second else if so we do not always return a node
+            } else if (currentNode.value) {
+                return currentNode;
+            }
+        }
+        return false;
+    }
+}
+
 const tree = new BinarySearchTree();
 tree.insert(9)
 tree.insert(4)
@@ -75,7 +132,7 @@ tree.insert(15)
 tree.insert(1)
 console.log(tree)
 
-console.log(tree.lookup(15))
+// console.log(tree.lookup(15))
 // JSON.stringify(traverse(tree.root))
 
 //     9
