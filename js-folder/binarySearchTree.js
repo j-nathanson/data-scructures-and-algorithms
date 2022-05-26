@@ -129,20 +129,20 @@ class BinarySearchTree {
         // target has 2 children
         else {
             let successor = target.right;
-            let preSuccessor = successor;
+            let parentSuccessor = successor;
 
             // while not on the last left most node
             while (successor.left) {
-                preSuccessor = successor;
+                parentSuccessor = successor;
                 successor = successor.left;
             }
 
             // remove successor and child from the tree
             if (successor.right) {
-                preSuccessor.left = successor.right;
+                parentSuccessor.left = successor.right;
                 successor.right = null;
             } else {
-                preSuccessor.left = null;
+                parentSuccessor.left = null;
             }
 
             // grab left side of the target
