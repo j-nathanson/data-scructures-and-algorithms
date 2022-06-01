@@ -18,7 +18,7 @@ function reverseStringRecursive(str) {
         return str
     } else {
         // substring up to not including the last char
-        return str.charAt(str.length - 1) + reverseStringRecursive(str.substring(0, str.length - 1))
+        return str.charAt(str.length - 1) + reverseStringRecursive(str.substr(0, str.length - 1))
     }
 }
 
