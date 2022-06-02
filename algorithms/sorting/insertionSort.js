@@ -49,3 +49,5 @@ function insertionSort2(array) {
 
 insertionSort2(numbers3);
 console.log(numbers3);
+
+//good for nearly sorted items
