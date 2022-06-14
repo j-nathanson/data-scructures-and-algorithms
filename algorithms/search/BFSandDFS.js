@@ -170,6 +170,61 @@ class BinarySearchTree {
 
         return this.breadthFirstSearchR(queue, list)
     }
+
+    // space complexity O(height of the tree)
+    // (Left, Root, Right) [ 1, 4, 6, 9, 15, 20, 170 ]
+    DFSInorder() {
+        return traverseInOrder(this.root, [])
+    }
+    // (Left, Right, Root) reverse bredth? [ 1, 6, 4, 15, 170, 20, 9 ]
+    DFSPostorder() {
+        return traversePostOrder(this.root, [])
+
+    }
+    // (Root, Left, Right) [ 9, 4, 1, 6, 20, 15, 170 ]
+    DFSPreorder() {
+        return traversePreOrder(this.root, [])
+    }
+}
+
+function traverseInOrder(node, list) {
+    // go to left most node
+    if (node.left) {
+        traverseInOrder(node.left, list)
+    }
+    // push current node
+    list.push(node.value)
+    // go to the right nodes
+    if (node.right) {
+        traverseInOrder(node.right, list)
+    }
+    console.log(list)
+    return list
+}
+function traversePreOrder(node, list) {
+    //  push parent first
+    list.push(node.value)
+    if (node.left) {
+        traversePreOrder(node.left, list)
+    }
+
+    if (node.right) {
+        traversePreOrder(node.right, list)
+    }
+    console.log(list)
+    return list
+}
+function traversePostOrder(node, list) {
+    if (node.left) {
+        traversePostOrder(node.left, list)
+    }
+    if (node.right) {
+        traversePostOrder(node.right, list)
+    }
+    // push at the end before parent node
+    list.push(node.value)
+    console.log(list)
+    return list
 }
 
 const tree = new BinarySearchTree();
@@ -181,8 +236,9 @@ tree.insert(170)
 tree.insert(15)
 tree.insert(1)
 // tree.remove(170)
-tree.breadthFirstSearch()
-tree.breadthFirstSearchR([tree.root], [])
+// tree.breadthFirstSearch()
+// tree.breadthFirstSearchR([tree.root], [])
+tree.DFSPostorder()
 JSON.stringify(traverse(tree.root))
 
 //     9
